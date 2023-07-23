@@ -11,12 +11,13 @@
 
 void print_var(char var[], int *a);
 
-int _printf(const char *format,...){
+int _printf(const char *format,...)
+{
 	va_list list;  
     char var[size]; 
     int i, outputs=0 , c=0; 
 
-	int f, w, p, s, a = 0;
+	int  a = 0;
     va_start(list, format);
     
     if (format == NULL)
@@ -30,27 +31,22 @@ int _printf(const char *format,...){
 		{
 
 			print_var(var , &a);
-
-    		f = get_f(format, &i);
-			w = get_w(format, &i, list);
-			p = get_p(format, &i, list);
-			s = get_s(format, &i);
-			++i;
-			outputs = handle_print(format, &i, list, var,f, w, p, s);
+    		++i;
+			outputs = handle_print(format, &i, list, var);
 			if (outputs == -1)
 				return -1;
 			c += outputs;
 		}
-           else
-		   {
-				format[i] = var[a++] ;
-				if (a == size)
-				{
-					write(1, &format[i], 1);
-					print_var(var , &index);
-					c++;
-				}
-           }
+        else
+		{
+		format[i] = var[a++] ;
+		if (a == size)
+			{
+			write(1, &format[i], 1);
+			print_var(var , &a);
+			c++;
+			}
+        }
 	}
 	print_var(var, &a);
 	va_end(list);
