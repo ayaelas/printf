@@ -35,8 +35,10 @@ int _printf(const char *format,...)
 					counter += _print_percent();	
 					break;				
 				default:
-					i--;
-					continue;
+					counter += _print_percent();
+					write(1, &format[i + 1], 1);
+					counter++;
+					break;
 			}
 			i += 2;
 		}
