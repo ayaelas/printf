@@ -8,9 +8,9 @@
 
 int _print_percent(void)
 {
-    char percent = '%';
+	char percent = '%';
 
-    write(1, &percent, 1);
+	write(1, &percent, 1);
 
-    return (1);
+	return (1);
 }

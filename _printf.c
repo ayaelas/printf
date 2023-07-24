@@ -1,59 +1,50 @@
 #include "main.h"
 
-
 /**
-* _printf : print a function
-* Return: number of the printed chars
-* @format: format
-*/
+ * _printf - a remake of C's printf function
+ *
+ * @format: input string
+ *
+ * Return: number of characters printed
+ * or (-1) in case of an error
+ */
 
-int _printf(const char *format,...)
+int _printf(const char *format, ...)
 {
 	int i = 0, counter = 0;
+	va_list list;
 
-	va_list list;  
-    va_start(list, format);
-
-
-    
-    if (!format || (format[0] == '%' && !format[1]))
-        return (-1);
-    if (format[0] == '%' && format[0] == ' ' && !format[2])
+	va_start(list, format);
+	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
-	
+	if (format[0] == '%' && format[0] == ' ' && !format[2])
+		return (-1);
 
-    while (format[i])
-    {
-        if(format[i] == '%')
+	while (format[i])
+	{
+		if (format[i] == '%')
 		{
-			switch (format[i + 1])
+			if (format[i + 1] == 'c')
+				counter += _print_char(va_arg(list, int));
+			else if (format[i + 1] == 's')
+				counter += _print_str(va_arg(list, char *));
+			else if (format[i + 1] == '%')
+				counter += _print_percent();
+			else
 			{
-				case 'c':
-					counter += _print_char(va_arg(list, int));
-					break;
-				case 's':
-					counter += _print_str(va_arg(list, char *));
-					break;
-				case '%':
-					counter += _print_percent();	
-					break;				
-				default:
-					counter += _print_percent();
-					if (format[i + 1])
-						write(1, &format[i + 1], 1);
-					counter++;
-					break;
+				counter += _print_percent();
+				if (format[i + 1])
+					write(1, &format[i + 1], 1);
+				counter++;
 			}
 			i += 2;
 		}
-        else
+		else
 		{
 			counter += _print_char(format[i]);
 			i++;
-        }
-
+		}
 	}
-
 	va_end(list);
 	return (counter);
 }
