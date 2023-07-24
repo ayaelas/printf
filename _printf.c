@@ -16,7 +16,7 @@ int _printf(const char *format, ...)
 
 	va_start(list, format);
 	if (!format || (format[0] == '%' && !format[1]))
-		return (0);
+		return (-1);
 	if (format[0] == '%' && format[0] == ' ' && !format[2])
 		return (-1);
 
@@ -32,7 +32,6 @@ int _printf(const char *format, ...)
 				counter += _print_percent();
 			else
 			{
-				
 				if (format[i + 1])
 					write(1, &format[i + 1], 1);
 				else
