@@ -11,9 +11,17 @@
 int _print_str(char *s)
 {
 	int i = 0;
+    char *n = "(null)";
 
 	if (s == NULL)
-		return (0);
+    {
+        while (n[i] != '\0')
+        {
+            write(1, &n[i], 1);
+            i++;
+        }
+        return (i);
+    }
 
 	while (s[i] != '\0')
 	{
