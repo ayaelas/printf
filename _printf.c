@@ -32,9 +32,11 @@ int _printf(const char *format, ...)
 				counter += _print_percent();
 			else
 			{
-				counter += _print_percent();
+				
 				if (format[i + 1])
 					write(1, &format[i + 1], 1);
+				else
+					return (counter);
 				counter++;
 			}
 			i += 2;
