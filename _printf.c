@@ -1,65 +1,52 @@
-#include <stdio.h>
 #include "main.h"
-#include <stdarg.h>
-
 
 /**
-*_printf : print a function
-*Return: number of the printed chars
-*@format: format
-*/
+ * _printf - a remake of C's printf function
+ *
+ * @format: input string
+ *
+ * Return: number of characters printed
+ * or (-1) in case of an error
+ */
 
-void print_var(char var[], int *a);
-
-int _printf(const char *format,...)
+int _printf(const char *format, ...)
 {
-	va_list list;  
-    char var[size]; 
-    int i, outputs=0 , c=0; 
+	int i = 0, counter = 0;
+	va_list list;
 
-	int  a = 0;
-    va_start(list, format);
-    
-    if (format == NULL)
+	va_start(list, format);
+	if (!format || (format[0] == '%' && !format[1]))
+		return (0);
+	if (format[0] == '%' && format[0] == ' ' && !format[2])
+		return (-1);
+
+	while (format[i])
 	{
-        return -1;
-    }
-
-    while (format[i] && format != '\0')
-    {
-        if(format[i] == '%')
+		if (format[i] == '%')
 		{
-
-			print_var(var , &a);
-    		++i;
-			outputs = handle_print(format, &i, list, var);
-			if (outputs == -1)
-				return -1;
-			c += outputs;
-		}
-        else
-		{
-		format[i] = var[a++] ;
-		if (a == size)
+			if (format[i + 1] == 'c')
+				counter += _print_char(va_arg(list, int));
+			else if (format[i + 1] == 's')
+				counter += _print_str(va_arg(list, char *));
+			else if (format[i + 1] == '%')
+				counter += _print_percent();
+			else
 			{
-			write(1, &format[i], 1);
-			print_var(var , &a);
-			c++;
+				
+				if (format[i + 1])
+					write(1, &format[i + 1], 1);
+				else
+					return (counter);
+				counter++;
 			}
-        }
+			i += 2;
+		}
+		else
+		{
+			counter += _print_char(format[i]);
+			i++;
+		}
 	}
-	print_var(var, &a);
 	va_end(list);
-	return (c);
-}
-
-/*
-*print_var : prints the buffer's content 
-*@var : number of characters
-*@a : the inder where the next char is added
-*/
-void print_var(char *buffer, int *a){ 
-	if (*a > 0)
-		write(1, &var[0], *a);
-	*a = 0;
+	return (counter);
 }
