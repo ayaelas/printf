@@ -14,8 +14,9 @@ int _print_int(va_list list)
 	int len = digit_count(num);
 
 	if (num <= 0)
-	    len++;
-	_printn(num);
+		len++;
+	else
+		_printn(num);
 	return (len);
 }
 
