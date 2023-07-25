@@ -1,5 +1,4 @@
 #include "main.h"
-int percent_check(const char *s);
 
 /**
  * _printf - a remake of C's printf function
@@ -12,26 +11,23 @@ int percent_check(const char *s);
 
 int _printf(const char *format, ...)
 {
-	int i = 0, counter = 0;
-	va_list list;
+	int (*pf)(va_list);
+	const char *p;
+	va_list ap;
+	int count = 0;
 
-	va_start(list, format);
+	va_start(ap, format);
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
 
-	while (format[i])
+	for (p = format; *p; p++)
 	{
-		if (format[i] == '%')
+		if (*p == '%')
 		{
-			if (format[i + 1] == 'c')
-				counter += _print_char(va_arg(list, int));
-			else if (format[i + 1] == 's')
-				counter += _print_str(va_arg(list, char *));
-			else if (format[i + 1] == '%')
-				counter += _print_percent();
-			else
+			p++;
+			if (*p == '%')
 			{
 				if (format[i + 1])
 				{
@@ -43,31 +39,18 @@ int _printf(const char *format, ...)
 				else
 					return (counter);
 				counter++;
+				count += _putchar('%');
+				continue;
 			}
-			i += 2;
+			pf = handle(*p);
+			count += (pf)
+				? pf(ap)
+				: _printf("%%%c", *p);
 		}
 		else
-		{
-			counter += _print_char(format[i]);
-			i++;
-		}
+			count += _putchar(*p);
 	}
-	va_end(list);
-	return (counter);
-}
-
-int percent_check(const char *s)
-{
-	int i = 0, c = -1;
-
-	while (s[i] != '\0')
-	{
-		if (s[i] != ' ')
-		{
-			if (c == -1)
-				c = 0;
-		}
-		i++;
-	}
-	return (c);
+	_putchar(-1);
+	va_end(ap);
+	return (count);
 }

@@ -3,14 +3,13 @@
 /**
  * _print_percent - prints '%'
  *
+ * @list: arguments
+ *
  * Return: always 1 (for the single character printed)
 */
 
-int _print_percent(void)
+int _print_percent(va_list list)
 {
-	char percent = '%';
-
-	write(1, &percent, 1);
-
-	return (1);
+	(void)list;
+	return (_putchar('%'));
 }
