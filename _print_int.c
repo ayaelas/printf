@@ -15,8 +15,7 @@ int _print_int(va_list list)
 
 	if (num <= 0)
 		len++;
-	else
-		_printn(num);
+	_printn(num);
 	return (len);
 }
 
