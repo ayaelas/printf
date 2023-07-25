@@ -1,5 +1,7 @@
 #include "main.h"
 
+int percent_check(const char *s);
+
 /**
  * _printf - a remake of C's printf function
  *
@@ -16,9 +18,9 @@ int _printf(const char *format, ...)
 
 	va_start(list, format);
 	if (!format || (format[0] == '%' && !format[1]))
-		return (-1);
+		return (0);
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
-		return (-1);
+		return (0);
 
 	while (format[i])
 	{
@@ -33,7 +35,12 @@ int _printf(const char *format, ...)
 			else
 			{
 				if (format[i + 1])
-					write(1, &format[i + 1], 1);
+				{
+					if (percent_check(&format[i + 1]) != -1)
+						write(1, &format[i + 1], 1);
+					else
+						return (0);
+				}
 				else
 					return (counter);
 				counter++;
@@ -48,4 +55,20 @@ int _printf(const char *format, ...)
 	}
 	va_end(list);
 	return (counter);
+}
+
+int percent_check(const char *s)
+{
+	int i = 0, c = -1;
+
+	while (s[i] != '\0')
+	{
+		if (s[i] != ' ')
+		{
+			if (c == -1)
+				c = 0;
+		}
+		i++;
+	}
+	return (c);
 }
