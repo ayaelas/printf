@@ -28,16 +28,20 @@ int _print_int(va_list list)
 */
 void _printn(int n)
 {
+    unsigned int n2;
+
     if (n < 0)
     {
         _putchar('-');
-        n = -n;
+        n2 = -n;
     }
+    else
+        n2 = n;
     
-    if (n / 10)
-        _printn(n / 10);
+    if (n2 / 10)
+        _printn(n2 / 10);
     
-    _putchar((n % 10) + '0');
+    _putchar((n2 % 10) + '0');
 }
 
 /**
