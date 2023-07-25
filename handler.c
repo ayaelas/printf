@@ -14,11 +14,13 @@ int (*handle(char s))(va_list)
 	specifier functions[] = {
 	{'s', _print_str},
 	{'c', _print_char},
-	{'%', _print_percent}
+	{'%', _print_percent},
+    {'i', _print_int},
+    {'d', _print_int}    
 	};
 	int i;
 
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < 5; i++)
 	{
 		if (functions[i].c == s)
 			return (functions[i].f);
