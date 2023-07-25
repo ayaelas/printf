@@ -27,18 +27,14 @@ int _printf(const char *format, ...)
 		if (*p == '%')
 		{
 			p++;
+			if (*p == '\0')
+			{
+				_putchar(-1);
+				va_end(ap);
+				return (count);
+			}
 			if (*p == '%')
 			{
-				if (format[i + 1])
-				{
-					if (percent_check(&format[i + 1]) != -1)
-						write(1, &format[i + 1], 1);
-					else
-						return (0);
-				}
-				else
-					return (counter);
-				counter++;
 				count += _putchar('%');
 				continue;
 			}
