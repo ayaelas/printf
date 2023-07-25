@@ -35,14 +35,12 @@ int _printf(const char *format, ...)
 			{
 				if (format[i + 1])
 				{
-					if (percent_check(&format[i + 1]) != -1)
-						write(1, &format[i + 1], 1);
-					else
-						return (0);
+				        write(1,&format[i],1)
+					write(1, &format[i + 1], 1);
 				}
 				else
-					return (counter);
-				counter++;
+					return (-1);
+				counter+=2;
 			}
 			i += 2;
 		}
