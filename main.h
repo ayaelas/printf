@@ -11,7 +11,7 @@
 /**
  * struct specifier - specifier and
  * its appropriate printing function
- * 
+ *
  * @c: the specifier
  * @f: pointer to its appropriate printing function
 */

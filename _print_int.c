@@ -10,13 +10,13 @@
 
 int _print_int(va_list list)
 {
-    int num = va_arg(list, int);
-    int len = digit_count(num);
+	int num = va_arg(list, int);
+	int len = digit_count(num);
 
-    if (num <= 0)
-        len++;
-    _printn(num);
-    return (len);
+	if (num <= 0)
+		len++;
+	_printn(num);
+	return (len);
 }
 
 /**
@@ -28,20 +28,19 @@ int _print_int(va_list list)
 */
 void _printn(int n)
 {
-    unsigned int n2;
+	unsigned int n2;
 
-    if (n < 0)
-    {
-        _putchar('-');
-        n2 = -n;
-    }
-    else
-        n2 = n;
-    
-    if (n2 / 10)
-        _printn(n2 / 10);
-    
-    _putchar((n2 % 10) + '0');
+	if (n < 0)
+	{
+		_putchar('-');
+		n2 = -n;
+	}
+	else
+		n2 = n;
+
+	if (n2 / 10)
+		_printn(n2 / 10);
+	_putchar((n2 % 10) + '0');
 }
 
 /**
@@ -54,10 +53,9 @@ void _printn(int n)
 */
 int digit_count(int n)
 {
-    int count = 0;
+	int count = 0;
 
-    for (count = 0; n != 0; count++)
-        n /= 10;
-
-    return (count);
+	for (count = 0; n != 0; count++)
+		n /= 10;
+	return (count);
 }
