@@ -16,11 +16,12 @@ int (*handle(char s))(va_list)
 	{'c', _print_char},
 	{'%', _print_percent},
     {'i', _print_int},
-    {'d', _print_int}    
+    {'d', _print_int},
+    {'b', _print_binary}  
 	};
 	int i;
 
-	for (i = 0; i < 5; i++)
+	for (i = 0; i < 6; i++)
 	{
 		if (functions[i].c == s)
 			return (functions[i].f);
