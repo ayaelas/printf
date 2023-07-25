@@ -15,8 +15,8 @@ int (*handle(char s))(va_list)
 	{'s', _print_str},
 	{'c', _print_char},
 	{'%', _print_percent},
-    {'i', _print_int},
-    {'d', _print_int}    
+	{'i', _print_int},
+	{'d', _print_int}
 	};
 	int i;
 
