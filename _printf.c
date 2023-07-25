@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * _printf - a remake of C's printf function
  *
