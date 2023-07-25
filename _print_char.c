@@ -3,14 +3,13 @@
 /**
  * _print_char - prints a character
  *
- * @c: the character to print
+ * @list: arguments
  *
  * Return: 1 (for the single character printed)
 */
 
-int _print_char(char c)
+int _print_char(va_list list)
 {
-	write(1, &c, 1);
-
+	_putchar(va_arg(list, int));
 	return (1);
 }

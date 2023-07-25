@@ -7,10 +7,19 @@
 #include <stdarg.h>
 #include <limits.h>
 
+typedef struct specifiers
+{
+    char c;
+    int (*f)(va_list ap);
+} specifier;
+
 int _printf(const char *format, ...);
-int _print_char(char c);
-int _print_str(char *s);
-int _print_percent(void);
+int _print_str(va_list list);
+int _print_char(va_list list);
+int _print_percent(va_list list);
+int _putchar(char c);
+int _puts(char *s);
+int (*handle(char s))(va_list);
 
 #endif /* #ifndef HEADER_H */
 

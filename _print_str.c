@@ -3,31 +3,16 @@
 /**
  * _print_str - prints a string
  *
- * @s: pointer to the string
+ * @list: arguments
  *
  * Return: number of output characters.
 */
 
-int _print_str(char *s)
+int _print_str(va_list list)
 {
-	int i = 0;
-	char *n = "(null)";
+	char *s = va_arg(list, char *);
 
-	if (s == NULL)
-	{
-		while (n[i] != '\0')
-		{
-			write(1, &n[i], 1);
-			i++;
-		}
-		return (i);
-	}
-
-		while (s[i] != '\0')
-		{
-			write(1, &s[i], 1);
-			i++;
-		}
-
-		return (i);
+	if (!s)
+		s = "(null)";
+	return (_puts(s));
 }
