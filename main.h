@@ -30,6 +30,7 @@ int _print_binary(va_list list);
 int _print_char(va_list list);
 int _print_str(va_list list);
 int _print_int(va_list list);
+int _print_unsigned(va_list list);
 
 int digit_count(int n);
 void _printn(int n);
