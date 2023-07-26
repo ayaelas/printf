@@ -18,8 +18,6 @@ int (*handle(char s))(va_list)
 	{'i', _print_int},
 	{'d', _print_int},
 	{'b', _print_binary}
-	{'u', _print_unsigned}
-	{'o', _print_octal}
 	};
 	int i;
 
