@@ -9,19 +9,21 @@
 int print_unsigned(va_list list)
 {
 	unsigned int num = va_arg(list, unsigned int);
-	int i = size - 2;
-	int unsign[];
+	int i = size - 2, c;
+	char unsign[];
+
+	num = convert_size_uns(num, c);
 
 	if (num == 0)
 		unsign[i--] = '0';
 	unsign[size - 1] = '\0';
 
-	if (num > 0)
+	while (num > 0)
 	{
 		unsign[i--] = (num % 10) + '0';
 		num /= 10;
 	}
 	i++;
-	return (0);
+	return (write_uns(0, i, c));
 }
 
